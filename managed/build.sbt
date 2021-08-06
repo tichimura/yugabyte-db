@@ -167,7 +167,7 @@ libraryDependencies ++= Seq(
   "com.icegreen" % "greenmail-junit4" % "1.6.1" % Test,
   "org.apache.velocity" % "velocity" % "1.7",
   "org.apache.velocity" % "velocity-tools" % "2.0",
-  "com.fasterxml.jackson.core" % "jackson-core" % "2.10.5",
+  "com.fasterxml.jackson.core" % "jackson-core" % "2.12.4",
   "com.jayway.jsonpath" % "json-path" % "2.4.0",
   "commons-io" % "commons-io" % "2.8.0",
   "commons-codec" % "commons-codec" % "1.15",
