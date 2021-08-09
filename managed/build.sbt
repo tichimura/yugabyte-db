@@ -140,10 +140,10 @@ libraryDependencies ++= Seq(
   "org.apache.httpcomponents" % "httpclient" % "4.5.2",
   "org.flywaydb" %% "flyway-play" % "4.0.0",
   // https://github.com/YugaByte/cassandra-java-driver/releases
-  "com.yugabyte" % "cassandra-driver-core" % "3.8.0-yb-7",
+  "com.yugabyte" % "cassandra-driver-core" % "4.6.0-yb-7",
   "org.yaml" % "snakeyaml" % "1.17",
   "org.bouncycastle" % "bcpkix-jdk15on" % "1.61",
-  "org.springframework.security" % "spring-security-core" % "5.1.6.RELEASE",
+  "org.springframework.security" % "spring-security-core" % "5.3.10.RELEASE",
   "com.amazonaws" % "aws-java-sdk-ec2" % "1.11.907",
   "com.amazonaws" % "aws-java-sdk-kms" % "1.11.638",
   "com.amazonaws" % "aws-java-sdk-iam" % "1.11.670",
@@ -154,11 +154,11 @@ libraryDependencies ++= Seq(
   "io.prometheus" % "simpleclient_hotspot" % "0.11.0",
   "io.prometheus" % "simpleclient_servlet" % "0.11.0",
   "org.glassfish.jaxb" % "jaxb-runtime" % "2.3.2",
-  "org.pac4j" %% "play-pac4j" % "7.0.1",
-  "org.pac4j" % "pac4j-oauth" % "3.7.0" exclude("commons-io" , "commons-io"),
-  "org.pac4j" % "pac4j-oidc" % "3.7.0" exclude("commons-io" , "commons-io"),
+  "org.pac4j" %% "play-pac4j" % "9.0.2",
+  "org.pac4j" % "pac4j-oauth" % "5.1.3" exclude("commons-io" , "commons-io"),
+  "org.pac4j" % "pac4j-oidc" % "5.1.3" exclude("commons-io" , "commons-io"),
   "com.typesafe.play" %% "play-json" % "2.6.14",
-  "org.asynchttpclient" % "async-http-client" % "2.2.1",
+  "org.asynchttpclient" % "async-http-client" % "2.12.3",
   "commons-validator" % "commons-validator" % "1.7",
   "com.h2database" % "h2" % "1.4.200" % Test,
   "org.hamcrest" % "hamcrest-core" % "2.2" % Test,
@@ -309,7 +309,7 @@ libraryDependencies ++= Seq(
   //  "org.webjars" % "swagger-ui" % "3.43.0",
   "io.swagger" %% "swagger-play2" % "1.6.1",
   "io.swagger" %% "swagger-scala-module" % "1.0.5",
-  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.8"
+  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.4"
 )
 // https://mvnrepository.com/artifact/eu.unicredit/sbt-swagger-codegen-lib
 //libraryDependencies += "eu.unicredit" %% "sbt-swagger-codegen-lib" % "0.0.12"
