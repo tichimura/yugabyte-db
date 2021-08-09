@@ -67,7 +67,6 @@
     "cronstrue": "1.94.0",
     "enumify": "1.0.4",
     "formik": "1.5.8",
-    "glob-parent": "^5.1.2",
     "highlight.js": "9.14.2",
     "intl": "1.2.5",
     "is-svg": "^4.3.1",
