@@ -310,7 +310,12 @@ libraryDependencies ++= Seq(
   "io.swagger" %% "swagger-play2" % "1.6.1",
   "io.swagger" %% "swagger-scala-module" % "1.0.5",
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.4",
-  "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.4"
+  "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.4",
+  "io.netty" % "netty-handler" % "4.1.66.Final",
+  "io.netty" % "netty-codec-http" % "4.1.66.Final",
+  "io.netty" % "netty" % "3.10.6.Final",
+  "net.minidev" % "json-smart" % "2.4.7",
+  "com.nimbusds" % "nimbus-jose-jwt" % "9.11.3"
 )
 // https://mvnrepository.com/artifact/eu.unicredit/sbt-swagger-codegen-lib
 //libraryDependencies += "eu.unicredit" %% "sbt-swagger-codegen-lib" % "0.0.12"
