@@ -154,11 +154,11 @@ libraryDependencies ++= Seq(
   "io.prometheus" % "simpleclient_hotspot" % "0.11.0",
   "io.prometheus" % "simpleclient_servlet" % "0.11.0",
   "org.glassfish.jaxb" % "jaxb-runtime" % "2.3.2",
-  "org.pac4j" %% "play-pac4j" % "9.0.2",
-  "org.pac4j" % "pac4j-oauth" % "5.1.3" exclude("commons-io" , "commons-io"),
-  "org.pac4j" % "pac4j-oidc" % "5.1.3" exclude("commons-io" , "commons-io"),
+  "org.pac4j" %% "play-pac4j" % "7.0.1",
+  "org.pac4j" % "pac4j-oauth" % "3.7.0" exclude("commons-io" , "commons-io"),
+  "org.pac4j" % "pac4j-oidc" % "3.7.0" exclude("commons-io" , "commons-io"),
   "com.typesafe.play" %% "play-json" % "2.6.14",
-  "org.asynchttpclient" % "async-http-client" % "2.12.3",
+  "org.asynchttpclient" % "async-http-client" % "2.2.1",
   "commons-validator" % "commons-validator" % "1.7",
   "com.h2database" % "h2" % "1.4.200" % Test,
   "org.hamcrest" % "hamcrest-core" % "2.2" % Test,
@@ -317,7 +317,7 @@ libraryDependencies ++= Seq(
 
 dependencyOverrides += "com.google.protobuf" % "protobuf-java" % "latest.integration"
 dependencyOverrides += "com.google.guava" % "guava" % "23.0"
-
+dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.4"
 
 javaOptions in Test += "-Dconfig.file=src/main/resources/application.test.conf"
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-v", "-q", "-a")
