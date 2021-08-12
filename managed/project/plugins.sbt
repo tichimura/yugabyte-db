@@ -20,3 +20,5 @@ addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "5.2.4")
 addSbtPlugin("com.swoval" % "sbt-jvm-format" % "0.3.1")
 
 //addSbtPlugin("com.hootsuite" %% "sbt-swagger" % "1.0.0")
+
+addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.10.0-RC1")
