@@ -141,7 +141,7 @@ libraryDependencies ++= Seq(
   "org.flywaydb" %% "flyway-play" % "4.0.0",
   // https://github.com/YugaByte/cassandra-java-driver/releases
   "com.yugabyte" % "cassandra-driver-core" % "3.8.0-yb-7",
-  "org.yaml" % "snakeyaml" % "1.17",
+  "org.yaml" % "snakeyaml" % "1.29",
   "org.bouncycastle" % "bcpkix-jdk15on" % "1.61",
   "org.springframework.security" % "spring-security-core" % "5.3.10.RELEASE",
   "com.amazonaws" % "aws-java-sdk-ec2" % "1.11.907",
@@ -166,7 +166,7 @@ libraryDependencies ++= Seq(
   "com.icegreen" % "greenmail" % "1.6.1" % Test,
   "com.icegreen" % "greenmail-junit4" % "1.6.1" % Test,
   "org.apache.velocity" % "velocity" % "1.7",
-  "org.apache.velocity.tools" % "velocity-tools-generic" % "3.0",
+  "org.apache.velocity" % "velocity-engine-core" % "2.3",
   "com.fasterxml.jackson.core" % "jackson-core" % "2.10.5",
   "com.jayway.jsonpath" % "json-path" % "2.4.0",
   "commons-io" % "commons-io" % "2.8.0",
@@ -311,12 +311,13 @@ libraryDependencies ++= Seq(
   "io.swagger" %% "swagger-scala-module" % "1.0.5",
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.10.5",
   // Overrides mainly to address transitive deps in cassandra-driver-core and pac4j-oidc/oauth
-  "com.fasterxml.jackson.core" % "jackson-databind" % "2.10.5",
+  "com.fasterxml.jackson.core" % "jackson-databind" % "2.10.5.1",
   "io.netty" % "netty-handler" % "4.1.66.Final",
   "io.netty" % "netty-codec-http" % "4.1.66.Final",
   "io.netty" % "netty" % "3.10.6.Final",
-  "net.minidev" % "json-smart" % "2.4.7",
-  "com.nimbusds" % "nimbus-jose-jwt" % "9.11.3"
+  "com.cronutils" % "cron-utils" % "9.1.5",
+  "com.nimbusds" % "nimbus-jose-jwt" % "9.11.3",
+  "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.10.5",
 )
 // https://mvnrepository.com/artifact/eu.unicredit/sbt-swagger-codegen-lib
 //libraryDependencies += "eu.unicredit" %% "sbt-swagger-codegen-lib" % "0.0.12"
