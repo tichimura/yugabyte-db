@@ -21,7 +21,7 @@ analyze:
         cmd: |
           set -euo pipefail -x
           mvn --batch-mode dependency:tree -f "$(
-            sbt -Dsbt.log.noformat=true makePom | perl -n -e '/^\[info\] Wrote (.*[.]pom)$/ && print $1'
+            USE_MAVEN_LOCAL=true sbt -Dsbt.log.noformat=true make-pom | perl -n -e '/^\[info\] Wrote (.*[.]pom)$/ && print $1'
           )"
     - name: ui
       type: npm
