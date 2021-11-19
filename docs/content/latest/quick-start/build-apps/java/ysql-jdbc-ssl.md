@@ -52,6 +52,7 @@ showAsideToc: true
 This tutorial assumes that:
 
 - YugabyteDB is up and running. If you are new to YugabyteDB, you can download, install, and have YugabyteDB up and running within five minutes by following the steps in [Quick start](../../../../quick-start/).
+- You can setup SSL/TLS as you like, but this tutorial assumes you are using `minikube` with TLS enabled mode. see steps in [Set up cluster with minikube (Optional)](#set- up-cluster-with-minikube-optional)
 - Java Development Kit (JDK) 1.8 or later is installed. JDK installers for Linux and macOS can be downloaded from [OpenJDK](http://jdk.java.net/), [AdoptOpenJDK](https://adoptopenjdk.net/), or [Azul Systems](https://www.azul.com/downloads/zulu-community/).
 - [Apache Maven](https://maven.apache.org/index.html) 3.3 or later is installed.
 - [OpenSSL](https://www.openssl.org/) 1.1.1 or later is installed.
@@ -248,3 +249,57 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
     Query returned: name = John, age = 35, language = Java
     ```
     
+## Set up cluster with minikube (Optional)
+
+
+1. Create cluster with `tls.enabled=true`
+
+    Add `tls.enabled=true` to the command line, which is described in [Quickstart](../../create-local-cluster/kubernetes/).
+
+    ```sh
+    $ kubectl create namespace yb-demo
+    $ helm install yb-demo yugabytedb/yugabyte \
+    --set resource.master.requests.cpu=0.5,resource.master.requests.memory=0.5Gi,\
+    resource.tserver.requests.cpu=0.5,resource.tserver.requests.memory=0.5Gi,\
+    replicas.master=1,replicas.tserver=1,tls.enabled=true --namespace yb-demo
+    ```
+
+1. Check ssl is applied with `ysqlsh`
+
+    running ysqlsh without option should be accessing `localhost:5433`
+
+    ```sh
+    $ ysqlsh
+    ysqlsh (11.2-YB-2.9.0.0-b0)
+    SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+    Type "help" for help.
+
+    yugabyte=#
+    ```
+
+1. Check whether Key and Cert files are there in t-server
+
+    ```
+    $ kubectl exec -n yb-demo -it yb-tserver-0 -- bash
+    [root@yb-tserver-0 cores]# ls -al /root/.yugabytedb/
+    total 4
+    drwxrwxrwt 3 root root  140 Oct 22 06:04 .
+    dr-xr-x--- 1 root root 4096 Oct 22 06:19 ..
+    drwxr-xr-x 2 root root  100 Oct 22 06:04 ..2021_10_22_06_04_46.596961191
+    lrwxrwxrwx 1 root root   31 Oct 22 06:04 ..data -> ..2021_10_22_06_04_46.596961191
+    lrwxrwxrwx 1 root root   15 Oct 22 06:04 root.crt -> ..data/root.crt
+    lrwxrwxrwx 1 root root   21 Oct 22 06:04 yugabytedb.crt -> ..data/yugabytedb.crt
+    lrwxrwxrwx 1 root root   21 Oct 22 06:04 yugabytedb.key -> ..data/yugabytedb.key
+    ```
+
+1. Download the these files to your laptop
+
+    ```sh
+    % mkdir YBClusterCerts; cd YBClusterCerts
+    % kubectl exec -n "yb-demo" "yb-tserver-0" -- tar -C "/root/.yugabytedb" -cf - . |tar xf -
+    Defaulted container "yb-tserver" out of: yb-tserver, yb-cleanup
+    % ls 
+    root.crt	yugabytedb.crt	yugabytedb.key
+    ```
+
+    then follow the instruction in [Set up SSL certificates](#set-up-ssl-certificates-for-java-applications)
