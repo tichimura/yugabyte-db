@@ -66,12 +66,25 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
 
     ```sh
     $ keytool -keystore ybtruststore -alias ybtruststore -import -file ca.crt
+    Enter keystore password:
+    Re-enter new password:
     ```
 
-1. Verify the `yugabytedb.crt` client certificate with `ybtruststore`.
+1. Export the truststore, `<YOURSTOREPASS>` should be what you entered in above step or before when you created the truststore.
 
     ```sh
-    $ openssl verify -CAfile ca.crt -purpose sslclient tlstest.crt
+    $ keytool -exportcert -keystore ybtruststore -alias ybtruststore -storepass <YOURSTOREPASS> -file ybtruststore.crt
+    ```
+
+1. Convert and export to PEM format with `ybtruststore.pem`.
+    ```sh
+    $ openssl x509 -inform der -in ybtruststore.crt -out ybtruststore.pem
+    ```
+
+1. Verify the `yugabytedb.crt` client certificate, which is downloaded before, with the PEM file `ybtruststore.pem` just exported before.
+
+    ```sh
+    $ openssl verify -CAfile ybtruststore.pem -purpose sslclient yugabytedb.crt
     ```
 
 1. Convert the client certificate to DER format.
@@ -102,7 +115,7 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
 
 1. Open the `pom.xml` file in a text editor.
 
-1. Add the following below the `<url>` element.
+1. Add the following below the `<url>` element, if you are using Java 8.
 
     ```xml
     <properties>
@@ -110,6 +123,16 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
       <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     ```
+
+    if you are using Java 11, it should be
+
+    ```xml
+    <properties>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    ```
+
 
 1. Add the following within the `<dependencies>` element.
 
@@ -213,7 +236,7 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
 1. Run your new program.
 
     ```sh
-    $ mvn -q package exec:java -DskipTests -Djavax.net.ssl.trustStore=ybtruststore -Djavax.net.ssl.trustStorePassword=yugabyte -Dexec.mainClass=com.yugabyte.HelloSqlSslApp
+    $ mvn -q package exec:java -DskipTests -Dexec.mainClass=com.yugabyte.HelloSqlSslApp
     ```
 
     You should see the following output:
@@ -221,7 +244,7 @@ To build a Java application that connects to YugabyteDB over an SSL connection, 
     ```output
     Connected to the PostgreSQL server successfully.
     Created table employee
-    Inserted data: INSERT INTO employee (id, name, age, language) VALUES (1, 'John', 35, 'Java');
-    Query returned: name=John, age=35, language: Java
+    EXEC: INSERT INTO employee VALUES (1, 'John', 35, 'Java')
+    Query returned: name = John, age = 35, language = Java
     ```
     
